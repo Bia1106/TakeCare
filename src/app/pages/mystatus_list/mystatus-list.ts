@@ -3,17 +3,17 @@ import { ConferenceData } from '../../providers/conference-data';
 
 @Component({
   selector: 'page-speaker-list',
-  templateUrl: 'speaker-list.html',
-  styleUrls: ['./speaker-list.scss'],
+  templateUrl: 'mystatus-list.html',
+  styleUrls: ['./mystatus-list.scss'],
 })
-export class SpeakerListPage {
-  speakers: any[] = [];
+export class MyStatusListPage {
+  users: any[] = [];
 
   constructor(public confData: ConferenceData) {}
 
   ionViewDidEnter() {
-    this.confData.getSpeakers().subscribe((speakers: any[]) => {
-      this.speakers = speakers;
+    this.confData.getUsers().subscribe((users: any[]) => {
+      this.users = users;
     });
   }
 }
