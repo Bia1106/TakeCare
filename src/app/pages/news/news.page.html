@@ -1,0 +1,23 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons  slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title >News</ion-title>
+    <ion-buttons slot="end">
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-card  *ngFor="let item of items">
+    <img src=" {{item.image}}" />
+    <ion-card-header>
+      <ion-card-subtitle> {{item.subtitle}}</ion-card-subtitle>
+      <ion-card-title> {{item.title}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{item.content}}
+    </ion-card-content>
+  </ion-card>
+</ion-content>

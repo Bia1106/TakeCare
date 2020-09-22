@@ -14,7 +14,7 @@ import { UserOptions } from '../../interfaces/user-options';
   styleUrls: ['./login.scss'],
 })
 export class LoginPage {
-  login: UserOptions = { username: '', password: '' };
+  login: UserOptions = { username: '', password: '', nome: '', idade:0,dataNasc:'',tipoSangue:'',sexo:'' };
   submitted = false;
 
   constructor(

@@ -21,13 +21,18 @@ export class AppComponent implements OnInit {
   appPages = [
     {
       title: 'News',
-      url: '/app/tabs/schedule',
-      icon: 'new'
+      url: '/app/tabs/news',
+      icon: 'search'
+    },
+    {
+      title: 'Formulário',
+      url: '/app/tabs/form-general-info',
+      icon: 'add-circle'
     },
     {
       title: 'My Status',
-      url: '/app/tabs/speakers',
-      icon: 'chart'
+      url: '/app/tabs/mystatus',
+      icon: 'person-circle'
     },
     {
       title: 'Map',

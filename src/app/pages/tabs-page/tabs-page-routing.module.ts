@@ -22,29 +22,56 @@ const routes: Routes = [
           }
         ]
       },
-      {
-        path: 'myStatus',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('../mystatus_list/mystatus-list.module').then(m => m.MyStatusListModule)
-          },
-          {
-            path: 'session/:sessionId',
-            loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
-          },
-          {
-            path: 'mystatus-details/:userId',
-            loadChildren: () => import('../mystatus_detail/mystatus-detail.module').then(m => m.MyStatusDetailModule)
-          }
-        ]
-      },
+      // {
+      //   path: 'mystatus',
+      //   children: [
+      //     {
+      //       path: '',
+      //       loadChildren: () => import('../mystatus_list/mystatus-list.module').then(m => m.MyStatusListModule)
+      //     },
+      //     {
+      //       path: 'session/:sessionId',
+      //       loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
+      //     },
+      //     {
+      //       path: 'mystatus-details/:userId',
+      //       loadChildren: () => import('../mystatus_detail/mystatus-detail.module').then(m => m.MyStatusDetailModule)
+      //     }
+      //   ]
+      // },
       {
         path: 'map',
         children: [
           {
             path: '',
             loadChildren: () => import('../map/map.module').then(m => m.MapModule)
+          }
+        ]
+      },
+      {
+        path: 'news',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../news/news.module').then(m => m.NewsPageModule)
+          }
+        ]
+      },
+      {
+        path: 'mystatus',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../mystatus/mystatus.module').then(m => m.MystatusPageModule)
+          }
+        ]
+      },
+      {
+        path: 'form-general-info',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../form-general-info/form-general-info.module').then(m => m.FormGeneralInfoPageModule)
           }
         ]
       },

@@ -4,6 +4,9 @@ ion-menu ion-content {
 
   --background: var(--ion-item-background, var(--ion-background-color, #fff));
 }
+.logo{
+  text-align: center;
+}
 
 /* Remove background transitions for switching themes */
 ion-menu ion-item {

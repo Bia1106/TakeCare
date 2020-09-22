@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CheckTutorial } from './providers/check-tutorial.service';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/tutorial',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   {
@@ -21,6 +20,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)
   },
   {
+    path: 'news',
+    loadChildren: () => import('./pages/news/news.module').then(m => m.NewsPageModule)
+  },
+  {
     path: 'signup',
     loadChildren: () => import('./pages/signup/signup.module').then(m => m.SignUpModule)
   },
@@ -28,11 +31,21 @@ const routes: Routes = [
     path: 'app',
     loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsModule)
   },
+  // {
+  //   path: 'tutorial',
+  //   loadChildren: () => import('./pages/tutorial/tutorial.module').then(m => m.TutorialModule),
+  //   canLoad: [CheckTutorial]
+  // },
   {
-    path: 'tutorial',
-    loadChildren: () => import('./pages/tutorial/tutorial.module').then(m => m.TutorialModule),
-    canLoad: [CheckTutorial]
+    path: 'mystatus',
+    loadChildren: () => import('./pages/mystatus/mystatus.module').then( m => m.MystatusPageModule)
+  },
+  {
+    path: 'form-general-info',
+    loadChildren: () => import('./pages/form-general-info/form-general-info.module').then( m => m.FormGeneralInfoPageModule)
   }
+
+
 ];
 
 @NgModule({
