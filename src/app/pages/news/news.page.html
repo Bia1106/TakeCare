@@ -1,23 +1,28 @@
 <ion-header translucent="true">
-  <ion-toolbar>
-    <ion-buttons  slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title >News</ion-title>
-    <ion-buttons slot="end">
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="app/tabs/map"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Notícias</ion-title>
+        <ion-buttons slot="end">
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen>
-  <ion-card  *ngFor="let item of items">
-    <img src=" {{item.image}}" />
-    <ion-card-header>
-      <ion-card-subtitle> {{item.subtitle}}</ion-card-subtitle>
-      <ion-card-title> {{item.title}}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      {{item.content}}
-    </ion-card-content>
-  </ion-card>
+    <ion-avatar>
+        <img style="margin-left: 280px;margin-top: 10px;" src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar" [routerLink]="['/account']">
+    </ion-avatar>
+    <ion-label style="font-weight: bolder;font-size: larger;">Bem vindo(a) de volta!</ion-label>
+    <ion-searchbar></ion-searchbar>
+    <ion-card *ngFor="let item of items">
+        <img src=" {{item.image}}" />
+        <ion-card-header>
+            <ion-card-subtitle> {{item.subtitle}}</ion-card-subtitle>
+            <ion-card-title> {{item.title}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            {{item.content}}
+        </ion-card-content>
+    </ion-card>
 </ion-content>

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs-page';
-import { SchedulePage } from '../schedule/schedule';
 
 
 const routes: Routes = [
@@ -9,36 +8,6 @@ const routes: Routes = [
     path: 'tabs',
     component: TabsPage,
     children: [
-      {
-        path: 'schedule',
-        children: [
-          {
-            path: '',
-            component: SchedulePage,
-          },
-          {
-            path: 'session/:sessionId',
-            loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
-          }
-        ]
-      },
-      // {
-      //   path: 'mystatus',
-      //   children: [
-      //     {
-      //       path: '',
-      //       loadChildren: () => import('../mystatus_list/mystatus-list.module').then(m => m.MyStatusListModule)
-      //     },
-      //     {
-      //       path: 'session/:sessionId',
-      //       loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
-      //     },
-      //     {
-      //       path: 'mystatus-details/:userId',
-      //       loadChildren: () => import('../mystatus_detail/mystatus-detail.module').then(m => m.MyStatusDetailModule)
-      //     }
-      //   ]
-      // },
       {
         path: 'map',
         children: [
@@ -54,6 +23,15 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () => import('../news/news.module').then(m => m.NewsPageModule)
+          }
+        ]
+      },
+      {
+        path: 'chat',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../chat/chat.module').then(m => m.ChatPageModule)
           }
         ]
       },
@@ -83,11 +61,6 @@ const routes: Routes = [
             loadChildren: () => import('../about/about.module').then(m => m.AboutModule)
           }
         ]
-      },
-      {
-        path: '',
-        redirectTo: '/app/tabs/schedule',
-        pathMatch: 'full'
       }
     ]
   }

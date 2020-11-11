@@ -1,10 +1,9 @@
+import { UserLogin } from './../../interfaces/user-options';
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { UserData } from '../../providers/user-data';
-
-import { UserOptions } from '../../interfaces/user-options';
+import { AuthenticationService } from '../../providers/authentication.service';
 
 
 
@@ -14,21 +13,33 @@ import { UserOptions } from '../../interfaces/user-options';
   styleUrls: ['./login.scss'],
 })
 export class LoginPage {
-  login: UserOptions = { username: '', password: '', nome: '', idade:0,dataNasc:'',tipoSangue:'',sexo:'' };
+  // login: UserLogin = { email: '', password: ''};
+  public email: string = '';
+  public password: string = '';
+
   submitted = false;
 
   constructor(
     public userData: UserData,
-    public router: Router
-  ) { }
+    public router: Router,
+    private auth: AuthenticationService
+  ) {
+    this.auth.logOut().then((data)=>{
+      this.auth.setUserLogged(false);
+    }).catch((error)=>{
+      console.log('Erro logout:',error);
+    });
+   }
 
-  onLogin(form: NgForm) {
-    this.submitted = true;
+  onLogin() {
+    this.auth.logIn(this.email, this.password).then((data) => {
+      console.log('data', data);
+      this.auth.setUserLogged(true);
+      this.router.navigateByUrl('/app/tabs/map');
+    }).catch((error) => {
+      console.log('Erro no login:', error);
+    });
 
-    if (form.valid) {
-      this.userData.login(this.login.username);
-      this.router.navigateByUrl('/app/tabs/schedule');
-    }
   }
 
   onSignup() {

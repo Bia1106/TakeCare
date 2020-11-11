@@ -1,3 +1,4 @@
+import { AuthenticationService } from './providers/authentication.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
@@ -20,66 +21,42 @@ import { UserData } from './providers/user-data';
 export class AppComponent implements OnInit {
   appPages = [
     {
-      title: 'News',
+      title: 'Notícias',
       url: '/app/tabs/news',
       icon: 'search'
     },
     {
-      title: 'Formulário',
-      url: '/app/tabs/form-general-info',
-      icon: 'add-circle'
+      title: 'Chat Suporte',
+      url: '/app/tabs/chat',
+      icon: 'chatbubbles'
     },
     {
-      title: 'My Status',
+      title: 'Formulário',
+      url: '/app/tabs/form-general-info',
+      icon: 'clipboard'
+    },
+    {
+      title: 'Meu Status',
       url: '/app/tabs/mystatus',
       icon: 'person-circle'
     },
     {
-      title: 'Map',
+      title: 'Mapa',
       url: '/app/tabs/map',
       icon: 'map'
     }
   ];
-  loggedIn = false;
+  loggedIn = this.auth.IsLoggedIn();
   dark = false;
 
   constructor(
-    private menu: MenuController,
     private platform: Platform,
-    private router: Router,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private storage: Storage,
-    private userData: UserData,
-    private swUpdate: SwUpdate,
-    private toastCtrl: ToastController,
+    private auth: AuthenticationService
   ) {
     this.initializeApp();
-  }
 
-  async ngOnInit() {
-    this.checkLoginStatus();
-    this.listenForLoginEvents();
-
-    this.swUpdate.available.subscribe(async res => {
-      const toast = await this.toastCtrl.create({
-        message: 'Update available!',
-        position: 'bottom',
-        buttons: [
-          {
-            role: 'cancel',
-            text: 'Reload'
-          }
-        ]
-      });
-
-      await toast.present();
-
-      toast
-        .onDidDismiss()
-        .then(() => this.swUpdate.activateUpdate())
-        .then(() => window.location.reload());
-    });
   }
 
   initializeApp() {
@@ -88,42 +65,14 @@ export class AppComponent implements OnInit {
       this.splashScreen.hide();
     });
   }
-
-  checkLoginStatus() {
-    return this.userData.isLoggedIn().then(loggedIn => {
-      return this.updateLoggedInStatus(loggedIn);
-    });
-  }
-
-  updateLoggedInStatus(loggedIn: boolean) {
-    setTimeout(() => {
-      this.loggedIn = loggedIn;
-    }, 300);
-  }
-
-  listenForLoginEvents() {
-    window.addEventListener('user:login', () => {
-      this.updateLoggedInStatus(true);
-    });
-
-    window.addEventListener('user:signup', () => {
-      this.updateLoggedInStatus(true);
-    });
-
-    window.addEventListener('user:logout', () => {
-      this.updateLoggedInStatus(false);
-    });
-  }
-
-  logout() {
-    this.userData.logout().then(() => {
-      return this.router.navigateByUrl('/app/tabs/schedule');
-    });
-  }
-
-  // openTutorial() {
-  //   this.menu.enable(false);
-  //   this.storage.set('ion_did_tutorial', false);
-  //   this.router.navigateByUrl('/tutorial');
+  // isLogged(){
+  //   if (this.auth.IsLoggedIn()) {
+  //     return this.loggedIn = true;
+  //   }else{
+  //     return this.loggedIn;
+  //   }
   // }
+  ngOnInit() {
+  }
+
 }

@@ -7,8 +7,7 @@ import { TabsPageRoutingModule } from './tabs-page-routing.module';
 
 import { AboutModule } from '../about/about.module';
 import { MapModule } from '../map/map.module';
-import { ScheduleModule } from '../schedule/schedule.module';
-import { SessionDetailModule } from '../session-detail/session-detail.module';
+
 
 
 @NgModule({
@@ -17,8 +16,6 @@ import { SessionDetailModule } from '../session-detail/session-detail.module';
     CommonModule,
     IonicModule,
     MapModule,
-    ScheduleModule,
-    SessionDetailModule,
     TabsPageRoutingModule
   ],
   declarations: [

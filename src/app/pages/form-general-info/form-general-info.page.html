@@ -1,65 +1,65 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Formulário</ion-title>
-  </ion-toolbar>
+<ion-header translucent="true">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="app/tabs/map"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Formulário</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
 
-  <div class="logo">
-    <img src="assets/img/icon.png" alt="Ionic Logo">
-  </div>
-
-  <form #infoForm="ngForm" novalidate>
-    <ion-list lines="none">
-      <ion-item>
-        <ion-label position="stacked" color="primary">Saiu de casa hoje?</ion-label>
-        <ion-input  name="username" type="text" required>
-        </ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Quanto tempo permaneceu fora de casa?</ion-label>
-        <ion-select value="notifications" interface="action-sheet">
-          <ion-select-option *ngFor="let item2 of items2" value="{{item2.tempo}}">{{item2.tempo}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked" color="primary">Entrou em algum transporte?</ion-label>
-        <ion-input  name="idade" type="text"  placeholder='Ex: Ônibus, Uber...' required>
-        </ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Levou kit de higiêne pessoal?</ion-label>
-        <ion-select value="notifications" interface="action-sheet">
-          <ion-select-option *ngFor="let item3 of items3" value="{{item3.resp}}">{{item3.resp}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked" color="primary">Qual foi a temperatura antes de sair?</ion-label>
-        <ion-input  name="tipoSangue" type="text"  required>
-        </ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked" color="primary">E a temperatura quando chegou em casa?</ion-label>
-        <ion-input name="sexo" type="text"  required>
-        </ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Sentiu algum desses sintomas?</ion-label>
-        <ion-select value="notifications" interface="action-sheet">
-          <ion-select-option *ngFor="let item of items" value="{{item.nome}}">{{item.nome}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-
-    </ion-list>
-
-    <div class="ion-padding">
-      <ion-button  type="submit" expand="block">Enviar P/ Análise</ion-button>
+    <div class="logo">
+        <img src="assets/img/icon.png" alt="Ionic Logo">
     </div>
-  </form>
+
+    <form #infoForm="ngForm" novalidate>
+        <ion-list lines="none">
+            <ion-item>
+                <ion-label position="stacked" color="primary">Saiu de casa hoje?</ion-label>
+                <ion-input [(ngModel)]="form.form_sair_casa" name="form_sair_casa" type="text" required>
+                </ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>Quanto tempo permaneceu fora de casa?</ion-label>
+                <ion-select value="notifications" interface="action-sheet" [(ngModel)]="form.item2" name="item2">
+                    <ion-select-option *ngFor="let item2 of items2" value="{{item2.tempo}}">{{item2.tempo}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked" color="primary">Entrou em algum transporte?</ion-label>
+                <ion-input [(ngModel)]="form.form_trasporte" name="form_trasporte" type="text" placeholder='Ex: Ônibus, Uber...' required>
+                </ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>Levou kit de higiêne pessoal?</ion-label>
+                <ion-select value="notifications" interface="action-sheet" [(ngModel)]="form.item3" name="item3">
+                    <ion-select-option *ngFor="let item3 of items3" value="{{item3.resp}}">{{item3.resp}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked" color="primary">Qual foi a temperatura antes de sair?</ion-label>
+                <ion-input [(ngModel)]="form.form_temperatura1" name="form_temperatura1" type="text" required>
+                </ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked" color="primary">E a temperatura quando chegou em casa?</ion-label>
+                <ion-input [(ngModel)]="form.form_temperatura2" name="form_temperatura2" type="text" required>
+                </ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>Sentiu algum desses sintomas?</ion-label>
+                <ion-select value="notifications" interface="action-sheet" [(ngModel)]="form.item" name="item">
+                    <ion-select-option *ngFor="let item of items" value="{{item.nome}}">{{item.nome}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+
+        </ion-list>
+
+        <div class="ion-padding">
+            <ion-button (click)="OnForm(infoForm)" name="form_button" type="submit" expand="block">Enviar P/ Análise</ion-button>
+        </div>
+    </form>
 
 </ion-content>

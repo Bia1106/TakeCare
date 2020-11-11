@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuardService } from './guards/auth-guard.service';
+
 
 const routes: Routes = [
   {
@@ -9,11 +11,13 @@ const routes: Routes = [
   },
   {
     path: 'account',
-    loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule)
+    loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'support',
-    loadChildren: () => import('./pages/support/support.module').then(m => m.SupportModule)
+    loadChildren: () => import('./pages/support/support.module').then(m => m.SupportModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'login',
@@ -21,7 +25,8 @@ const routes: Routes = [
   },
   {
     path: 'news',
-    loadChildren: () => import('./pages/news/news.module').then(m => m.NewsPageModule)
+    loadChildren: () => import('./pages/news/news.module').then(m => m.NewsPageModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'signup',
@@ -29,21 +34,25 @@ const routes: Routes = [
   },
   {
     path: 'app',
-    loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsModule)
+    loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsModule),
+    canActivate: [AuthGuardService]
   },
-  // {
-  //   path: 'tutorial',
-  //   loadChildren: () => import('./pages/tutorial/tutorial.module').then(m => m.TutorialModule),
-  //   canLoad: [CheckTutorial]
-  // },
   {
     path: 'mystatus',
-    loadChildren: () => import('./pages/mystatus/mystatus.module').then( m => m.MystatusPageModule)
+    loadChildren: () => import('./pages/mystatus/mystatus.module').then( m => m.MystatusPageModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'form-general-info',
-    loadChildren: () => import('./pages/form-general-info/form-general-info.module').then( m => m.FormGeneralInfoPageModule)
+    loadChildren: () => import('./pages/form-general-info/form-general-info.module').then( m => m.FormGeneralInfoPageModule),
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'chat',
+    loadChildren: () => import('./pages/chat/chat.module').then( m => m.ChatPageModule),
+    canActivate: [AuthGuardService]
   }
+
 
 
 ];

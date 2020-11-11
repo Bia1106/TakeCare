@@ -13,6 +13,7 @@ import { UserData } from '../../providers/user-data';
 })
 export class AccountPage implements AfterViewInit {
   username: string;
+  password: string;
 
   constructor(
     public alertCtrl: AlertController,
@@ -31,15 +32,16 @@ export class AccountPage implements AfterViewInit {
   // Present an alert with the current username populated
   // clicking OK will update the username and display it
   // clicking Cancel will close the alert and do nothing
+  //MUDAR PARA EXIBIR DADOS VINDO DO FIRESTORE!!!!!!!!!!
   async changeUsername() {
     const alert = await this.alertCtrl.create({
-      header: 'Change Username',
+      header: 'Mudar Usuário',
       buttons: [
         'Cancel',
         {
           text: 'Ok',
           handler: (data: any) => {
-            this.userData.setUsername(data.username);
+            // this.userData.setUsername(data.username);
             this.getUsername();
           }
         }
@@ -57,13 +59,37 @@ export class AccountPage implements AfterViewInit {
   }
 
   getUsername() {
-    this.userData.getUsername().then((username) => {
-      this.username = username;
-    });
+    // this.userData.getUsername().then((username) => {
+    //   this.username = username;
+    // });
   }
-
-  changePassword() {
-    console.log('Clicked to change password');
+//MUDAR PARA EXIBIR DADOS VINDO DO FIRESTORE!!!!!!!!!!
+  async changePassword() {
+    const alert = await this.alertCtrl.create({
+      header: 'Mudar Senha',
+      buttons: [
+        'Cancel',
+        {
+          text: 'Ok',
+          handler: (data: any) => {
+            // this.userData.setUsername(data.username);
+            this.getUsername();
+          }
+        }
+      ],
+      inputs: [
+        {
+          type: 'text',
+          name: 'password',
+          value: this.password,
+          placeholder: 'password'
+        }
+      ]
+    });
+    await alert.present();
+  }
+  chat() {
+    this.router.navigateByUrl('/chat');
   }
 
   logout() {

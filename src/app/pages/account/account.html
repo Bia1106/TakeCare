@@ -1,23 +1,24 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Account</ion-title>
-  </ion-toolbar>
+<ion-header translucent="true">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="app/tabs/map"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Conta</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div *ngIf="username" class="ion-padding-top ion-text-center">
-    <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
-    <h2>{{username}}</h2>
+    <div class="ion-padding-top ion-text-center">
+        <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
+        <h2>{{username}}</h2>
 
-    <ion-list inset>
-      <ion-item (click)="updatePicture()">Update Picture</ion-item>
-      <ion-item (click)="changeUsername()">Change Username</ion-item>
-      <ion-item (click)="changePassword()">Change Password</ion-item>
-      <ion-item (click)="support()">Support</ion-item>
-      <ion-item (click)="logout()">Logout</ion-item>
-    </ion-list>
-  </div>
+        <ion-list inset>
+            <ion-item (click)="updatePicture()">Atualizar Foto De Perfil</ion-item>
+            <ion-item (click)="changeUsername()">Mudar Usuário</ion-item>
+            <ion-item (click)="changePassword()">Mudar Senha</ion-item>
+            <ion-item (click)="chat()">Chat de suporte</ion-item>
+            <ion-item (click)="support()">Suporte</ion-item>
+            <ion-item (click)="logout()">Sair</ion-item>
+        </ion-list>
+    </div>
 </ion-content>
