@@ -29,6 +29,11 @@
             <!-- <small class="error-message" *ngIf="signUp.get('username').errors?.required || signUp.get('username').errors?.minLength || signUp.get('username').errors?.maxLength">
                 Preencha campo nome de usuário corretamente
             </small> -->
+            <ion-item>
+                <ion-label position="stacked" color="primary">Password</ion-label>
+                <ion-input [(ngModel)]="signup.password" name="password" type="password" #password="ngModel" required>
+                </ion-input>
+            </ion-item>
             <ion-item lines="inset">
                 <ion-label position="floating" color="primary">Nome</ion-label>
                 <ion-input [(ngModel)]="signup.nome" name="nome" type="text" #nome="ngModel" required>
