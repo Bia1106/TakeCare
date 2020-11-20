@@ -13,40 +13,31 @@
         <img src="assets/img/icon.png" alt="Ionic logo">
     </div>
 
-    <form #loginForm="ngForm" novalidate>
+    <form id="loginForm" name="loginForm" #loginForm="ngForm" [formGroup]="login" (submit)="onLogin()">
         <ion-list>
-            <ion-item>
+            <ion-item lines="inset">
                 <ion-label position="floating" color="primary">Email</ion-label>
-                <!-- <ion-input [(ngModel)]="login.email" name="email" type="text" #email="ngModel" spellcheck="false" autocapitalize="off" required>
-                </ion-input> -->
-                <ion-input [(ngModel)]="email" name="email" type="text" #email_="ngModel" spellcheck="false" autocapitalize="off" required>
+                <ion-input name="email" type="text" formControlName="email">
                 </ion-input>
+                <small class="error-message" *ngIf="(login.get('email').errors?.required || login.get('email').errors?.email) && (loginForm.submitted || login.get('email').touched)">
+                    Preencha campo email corretamente
+                </small>
             </ion-item>
 
-            <ion-text color="danger">
-                <p [hidden]="email_.valid || submitted == false" class="ion-padding-start">
-                    Username is required
-                </p>
-            </ion-text>
 
-            <ion-item>
+            <ion-item lines="inset">
                 <ion-label position="floating" color="primary">Senha</ion-label>
-                <!-- <ion-input [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required>
-                </ion-input> -->
-                <ion-input [(ngModel)]="password" name="password" type="password" #password_="ngModel" required>
+                <ion-input name="password" type="password" formControlName="password">
                 </ion-input>
+                <small class="error-message" *ngIf="login.get('password').errors?.required && (loginForm.submitted || login.get('password').touched)">
+                    Preencha campo senha corretamente
+                </small>
             </ion-item>
-
-            <ion-text color="danger">
-                <p [hidden]="password_.valid || submitted == false" class="ion-padding-start">
-                    Password is required
-                </p>
-            </ion-text>
         </ion-list>
 
         <ion-row>
             <ion-col>
-                <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">Entrar</ion-button>
+                <ion-button type="submit" expand="block" [disabled]="!login.valid">Entrar</ion-button>
             </ion-col>
             <ion-col>
                 <ion-button (click)="onSignup()" expand="block">Cadastrar</ion-button>

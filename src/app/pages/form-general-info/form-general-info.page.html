@@ -14,51 +14,72 @@
         <img src="assets/img/icon.png" alt="Ionic Logo">
     </div>
 
-    <form #infoForm="ngForm" novalidate>
+    <form id="infoForm" name="infoForm" #infoForm="ngForm" [formGroup]="form" (submit)="OnForm(infoForm)">
         <ion-list lines="none">
             <ion-item>
                 <ion-label position="stacked" color="primary">Saiu de casa hoje?</ion-label>
-                <ion-input [(ngModel)]="form.form_sair_casa" name="form_sair_casa" type="text" required>
+                <ion-input name="form_sair_casa" type="text" formControlName="form_sair_casa">
                 </ion-input>
+                <small class="error-message" *ngIf="(form.get('form_sair_casa').errors?.required || form.get('form_sair_casa').errors?.minLength || form.get('form_sair_casa').errors?.maxLength)  && (infoForm.submitted || form.get('form_sair_casa').touched)">
+                    Preencha campo corretamente
+                </small>
             </ion-item>
             <ion-item>
                 <ion-label>Quanto tempo permaneceu fora de casa?</ion-label>
-                <ion-select value="notifications" interface="action-sheet" [(ngModel)]="form.item2" name="item2">
-                    <ion-select-option *ngFor="let item2 of items2" value="{{item2.tempo}}">{{item2.tempo}}</ion-select-option>
+                <ion-select value="notifications" interface="action-sheet" name="item2" formControlName="item2">
+                    <ion-select-option *ngFor="let item2 of items2" [value]="item2.tempo" name="item2">{{item2.tempo}}</ion-select-option>
                 </ion-select>
+                <small class="error-message" *ngIf="form.get('item2').errors?.required  && (infoForm.submitted || form.get('item2').touched)">
+                    Preencha campo corretamente
+                </small>
             </ion-item>
             <ion-item>
                 <ion-label position="stacked" color="primary">Entrou em algum transporte?</ion-label>
-                <ion-input [(ngModel)]="form.form_trasporte" name="form_trasporte" type="text" placeholder='Ex: Ônibus, Uber...' required>
+                <ion-input name="form_trasporte" type="text" placeholder='Ex: Ônibus, Uber...' formControlName="form_trasporte">
                 </ion-input>
+                <small class="error-message" *ngIf="(form.get('form_trasporte').errors?.required || form.get('form_sair_casa').errors?.minLength || form.get('form_sair_casa').errors?.maxLength)  && (infoForm.submitted || form.get('form_trasporte').touched)">
+                    Preencha campo corretamente
+                </small>
             </ion-item>
             <ion-item>
                 <ion-label>Levou kit de higiêne pessoal?</ion-label>
-                <ion-select value="notifications" interface="action-sheet" [(ngModel)]="form.item3" name="item3">
-                    <ion-select-option *ngFor="let item3 of items3" value="{{item3.resp}}">{{item3.resp}}</ion-select-option>
+                <ion-select value="notifications" interface="action-sheet" name="item3" formControlName="item3">
+                    <ion-select-option *ngFor="let item3 of items3" [value]="item3.resp">{{item3.resp}}</ion-select-option>
                 </ion-select>
+                <small class="error-message" *ngIf="form.get('item3').errors?.required  && (infoForm.submitted || form.get('item3').touched)">
+                    Preencha campo corretamente
+                </small>
             </ion-item>
             <ion-item>
                 <ion-label position="stacked" color="primary">Qual foi a temperatura antes de sair?</ion-label>
-                <ion-input [(ngModel)]="form.form_temperatura1" name="form_temperatura1" type="text" required>
+                <ion-input name="form_temperatura1" type="text" formControlName="form_temperatura1">
                 </ion-input>
+                <small class="error-message" *ngIf="form.get('form_temperatura1').errors?.required  && (infoForm.submitted || form.get('form_temperatura1').touched)">
+                    Preencha campo corretamente
+                </small>
             </ion-item>
             <ion-item>
                 <ion-label position="stacked" color="primary">E a temperatura quando chegou em casa?</ion-label>
-                <ion-input [(ngModel)]="form.form_temperatura2" name="form_temperatura2" type="text" required>
+                <ion-input name="form_temperatura2" type="text" formControlName="form_temperatura2">
                 </ion-input>
+                <small class="error-message" *ngIf="form.get('form_temperatura2').errors?.required  && (infoForm.submitted || form.get('form_temperatura2').touched)">
+                    Preencha campo corretamente
+                </small>
             </ion-item>
             <ion-item>
                 <ion-label>Sentiu algum desses sintomas?</ion-label>
-                <ion-select value="notifications" interface="action-sheet" [(ngModel)]="form.item" name="item">
-                    <ion-select-option *ngFor="let item of items" value="{{item.nome}}">{{item.nome}}</ion-select-option>
+                <ion-select value="notifications" interface="action-sheet" name="item" formControlName="item">
+                    <ion-select-option *ngFor="let item of items" [value]="item.nome">{{item.nome}}</ion-select-option>
                 </ion-select>
+                <small class="error-message" *ngIf="form.get('item').errors?.required  && (infoForm.submitted || form.get('item').touched)">
+                    Preencha campo corretamente
+                </small>
             </ion-item>
 
         </ion-list>
 
         <div class="ion-padding">
-            <ion-button (click)="OnForm(infoForm)" name="form_button" type="submit" expand="block">Enviar P/ Análise</ion-button>
+            <ion-button name="form_button" type="submit" expand="block" [disabled]="!form.valid">Enviar P/ Análise</ion-button>
         </div>
     </form>
 

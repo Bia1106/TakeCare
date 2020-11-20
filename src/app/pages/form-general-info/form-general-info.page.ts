@@ -1,3 +1,4 @@
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { UserFormService } from './../../providers/user-form.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -9,8 +10,8 @@ import { UserForm } from '../../interfaces/user-form';
   styleUrls: ['./form-general-info.page.scss'],
 })
 export class FormGeneralInfoPage implements OnInit {
-  form: UserForm = { form_sair_casa: '', form_trasporte: '',form_temperatura1:'',form_temperatura2:'',item:'',item2:'',item3:''};
-  items= [
+  form: FormGroup;
+  items = [
     {
       nome: "Febre"
     },
@@ -21,10 +22,10 @@ export class FormGeneralInfoPage implements OnInit {
       nome: "Cansaço"
     },
     {
-      nome:"Nenhum dos sintomas acima"
+      nome: "Nenhum dos sintomas acima"
     }
   ];
-  items2= [
+  items2 = [
     {
       tempo: "< 20 min"
     },
@@ -38,7 +39,7 @@ export class FormGeneralInfoPage implements OnInit {
       tempo: "> 1 hora"
     }
   ];
-  items3= [
+  items3 = [
     {
       resp: "Sim"
     },
@@ -47,16 +48,31 @@ export class FormGeneralInfoPage implements OnInit {
     }
   ];
   constructor(private router: Router,
-              private userFormulario: UserFormService) { }
+    private userFormulario: UserFormService,
+    private formBulder: FormBuilder) { }
 
   ngOnInit() {
+    this.form = this.formBulder.group({
+      form_sair_casa: ['', Validators.compose([Validators.required, Validators.minLength(3),Validators.maxLength(3)])],
+      form_trasporte: ['', Validators.compose([Validators.required, Validators.minLength(4),Validators.maxLength(10)])],
+      form_temperatura1: ['', Validators.required],
+      form_temperatura2: ['', Validators.required],
+      item2: ['', Validators.required],
+      item3: ['', Validators.required],
+      item: ['', Validators.required]
+    });
   }
   OnForm() {
-    this.userFormulario.cadastrar_form(this.form).then((data) => {
+    if (this.form.invalid || this.form.pending) {
+      alert('Fomulário inválido!');
+    }
+    let formData = this.form.value;
+
+    this.userFormulario.cadastrar_form(formData).then((data) => {
       alert('Agradecemos o feedback! =D');
-      // this.router.navigateByUrl('/app/tabs/map');
+      this.form.reset(); 
     }).catch((erro) => {
       console.error(erro);
     })
-}
+  }
 }

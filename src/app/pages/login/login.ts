@@ -1,4 +1,4 @@
-import { UserLogin } from './../../interfaces/user-options';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -13,32 +13,42 @@ import { AuthenticationService } from '../../providers/authentication.service';
   styleUrls: ['./login.scss'],
 })
 export class LoginPage {
-  // login: UserLogin = { email: '', password: ''};
-  public email: string = '';
-  public password: string = '';
+  login: FormGroup;
 
-  submitted = false;
 
   constructor(
     public userData: UserData,
     public router: Router,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private formBulder: FormBuilder
   ) {
-    this.auth.logOut().then((data)=>{
+    this.auth.logOut().then((data) => {
       this.auth.setUserLogged(false);
-    }).catch((error)=>{
-      console.log('Erro logout:',error);
+    }).catch((error) => {
+      console.log('Erro logout:', error);
     });
-   }
+  }
+  ngOnInit() {
+    this.login = this.formBulder.group({
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.required]
+    });
+  }
 
   onLogin() {
-    this.auth.logIn(this.email, this.password).then((data) => {
+    if (this.login.invalid || this.login.pending) {
+      alert('Login inválido!');
+    }
+    let loginData = this.login.value;
+
+    this.auth.logIn(loginData).then((data) => {
       console.log('data', data);
       this.auth.setUserLogged(true);
       this.router.navigateByUrl('/app/tabs/map');
     }).catch((error) => {
       console.log('Erro no login:', error);
     });
+
 
   }
 

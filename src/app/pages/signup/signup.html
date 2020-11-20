@@ -13,72 +13,87 @@
         <img src="assets/img/icon.png" alt="Ionic Logo">
     </div>
 
-    <form #signupForm="ngForm" novalidate>
-        <!-- <form #signupForm="ngForm" [formGroup]="signUp" (submit)="onSignup()"></form> -->
+    <!-- <form #signupForm="ngForm" novalidate> -->
+    <form id="signupForm" name="signupForm" #signupForm="ngForm" [formGroup]="signUp" (submit)="onSignup()">
         <ion-list lines="none">
             <ion-item>
                 <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
             </ion-item>
             <ion-item lines="inset">
                 <ion-label position="floating" color="primary">Nome de Usuário</ion-label>
-                <ion-input [(ngModel)]="signup.username" name="username" type="text" #username="ngModel">
+                <ion-input name="username" type="text" formControlName="username">
                 </ion-input>
-                <!-- <ion-input [(ngModel)]="signup.username" name="username" type="text" #username="ngModel" formControlName="username">
-                </ion-input> -->
-            </ion-item>
-            <!-- <small class="error-message" *ngIf="signUp.get('username').errors?.required || signUp.get('username').errors?.minLength || signUp.get('username').errors?.maxLength">
-                Preencha campo nome de usuário corretamente
-            </small> -->
-            <ion-item>
-                <ion-label position="stacked" color="primary">Password</ion-label>
-                <ion-input [(ngModel)]="signup.password" name="password" type="password" #password="ngModel" required>
-                </ion-input>
+                <small class="error-message" *ngIf="(signUp.get('username').errors?.required || signUp.get('username').errors?.minLength || signUp.get('username').errors?.maxLength) && (signupForm.submitted || signUp.get('username').touched)">
+                    Preencha campo nome de usuário corretamente
+                </small>
             </ion-item>
             <ion-item lines="inset">
+                <ion-label position="floating" color="primary">Senha</ion-label>
+                <ion-input name="password" type="password" formControlName="password">
+                </ion-input>
+                <small class="error-message" *ngIf="signUp.get('password').errors?.required  && (signupForm.submitted || signUp.get('password').touched)">
+                    Preencha campo nome de senha corretamente
+                </small>
+            </ion-item>
+            <ion-item lines="inset">
+
                 <ion-label position="floating" color="primary">Nome</ion-label>
-                <ion-input [(ngModel)]="signup.nome" name="nome" type="text" #nome="ngModel" required>
+                <ion-input name="nome" type="text" formControlName="nome">
                 </ion-input>
+                <small class="error-message" *ngIf="(signUp.get('nome').errors?.required || signUp.get('nome').errors?.minLength || signUp.get('nome').errors?.maxLength) && (signupForm.submitted || signUp.get('nome').touched)">
+                    Preencha campo nome corretamente
+                </small>
             </ion-item>
             <ion-item lines="inset">
+
                 <ion-label position="floating" color="primary">Email</ion-label>
-                <ion-input [(ngModel)]="signup.email" name="email" type="email" #nome="ngModel">
+                <ion-input name="email" type="email" formControlName="email">
                 </ion-input>
-                <!-- <ion-input [(ngModel)]="signup.email" name="email" type="email" #nome="ngModel" formControlName="email">
-                </ion-input> -->
+                <small class="error-message" *ngIf="(signUp.get('email').errors?.required || signUp.get('email').errors?.email) && (signupForm.submitted || signUp.get('email').touched)">
+                    Preencha campo email corretamente
+                </small>
             </ion-item>
-            <!-- <small class="error-message" *ngIf="signUp.get('email').errors?.required || signUp.get('email').errors?.email">
-                Preencha campo email corretamente
-            </small> -->
             <ion-item lines="inset">
-                <ion-label position="stacked" color="primary">Idade</ion-label>
-                <ion-input [(ngModel)]="signup.idade" name="idade" type="text" #idade="ngModel" placeholder='Ex: 18'>
+
+                <ion-label position="floating" color="primary">Idade</ion-label>
+                <ion-input name="idade" type="text" placeholder='Ex: 18' formControlName="idade">
                 </ion-input>
-                <!-- <ion-input [(ngModel)]="signup.idade" name="idade" type="text" #idade="ngModel" placeholder='Ex: 18' formControlName="dataNasc">
-                </ion-input> -->
+                <small class="error-message" *ngIf="(signUp.get('idade').errors?.required || signUp.get('idade').errors?.minLength || signUp.get('idade').errors?.maxLength) && (signupForm.submitted || signUp.get('idade').touched)">
+                    Preencha campo idade corretamente
+                </small>
             </ion-item>
-            <!-- <small class="error-message" *ngIf="signUp.get('dataNasc').errors?.required || signUp.get('dataNasc').errors?.min">
-                Preencha campo email corretamente
-            </small> -->
             <ion-item lines="inset">
-                <ion-label position="stacked" color="primary">Data de Nascimento</ion-label>
-                <ion-datetime [(ngModel)]="signup.dataNasc" name="dataNasc" type="date" displayFormat="DD/MM/YYYY" #dataNasc="ngModel" required>
+
+                <ion-label position="floating" color="primary">Data de Nascimento</ion-label>
+                <ion-datetime name="dataNasc" type="date" displayFormat="DD/MM/YYYY" min="1900-01-01" formControlName="dataNasc">
                 </ion-datetime>
+                <small class="error-message" *ngIf="signUp.get('dataNasc').errors?.required  && (signupForm.submitted || signUp.get('dataNasc').touched)">
+                    Preencha campo data de nascimento corretamente
+                </small>
             </ion-item>
             <ion-item lines="inset">
+
                 <ion-label position="floating" color="primary">Tipo sanguineo</ion-label>
-                <ion-input [(ngModel)]="signup.tipoSangue" name="tipoSangue" type="text" #tipoSangue="ngModel" required>
+                <ion-input name="tipoSangue" type="text" formControlName="tipoSangue">
                 </ion-input>
+                <small class="error-message" *ngIf="(signUp.get('tipoSangue').errors?.required || signUp.get('tipoSangue').errors?.minLength || signUp.get('tipoSangue').errors?.maxLength) && (signupForm.submitted || signUp.get('tipoSangue').touched)">
+                    Preencha campo tipo sanguíneo corretamente
+                </small>
             </ion-item>
             <ion-item lines="inset">
+
                 <ion-label position="floating" color="primary">Sexo</ion-label>
-                <ion-input [(ngModel)]="signup.sexo" name="sexo" type="text" #sexo="ngModel" required>
+                <ion-input name="sexo" type="text" formControlName="sexo">
                 </ion-input>
+                <small class="error-message" *ngIf="signUp.get('sexo').errors?.required  && (signupForm.submitted || signUp.get('sexo').touched)">
+                    Preencha campo sexo corretamente
+                </small>
             </ion-item>
 
         </ion-list>
 
         <div class="ion-padding">
-            <ion-button (click)="onSignup(signupForm)" type="submit" expand="block">Cadastrar</ion-button>
+            <ion-button type="submit" expand="block" [disabled]="!signUp.valid">Cadastrar</ion-button>
         </div>
     </form>
 

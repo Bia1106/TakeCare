@@ -1,3 +1,4 @@
+import { UserLogin } from './../interfaces/user-options';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 
@@ -8,8 +9,8 @@ export class AuthenticationService {
   private logged: boolean = false;
 
   constructor(private fireAuth: AngularFireAuth) { }
-  logIn(email: string, senha: string) {
-    return this.fireAuth.auth.signInWithEmailAndPassword(email, senha);
+  logIn(user:UserLogin) {
+    return this.fireAuth.auth.signInWithEmailAndPassword(user.email, user.password);
   }
   logOut() {
     return this.fireAuth.auth.signOut();

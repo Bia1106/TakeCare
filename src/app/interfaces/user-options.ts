@@ -4,7 +4,7 @@ export interface UserOptions {
   password: string;
   nome: string;
   email: string;
-  idade: number;
+  idade: string;
   dataNasc: string;
   tipoSangue: string;
   sexo: string;
