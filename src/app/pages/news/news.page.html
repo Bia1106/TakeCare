@@ -14,15 +14,15 @@
         <img style="margin-left: 280px;margin-top: 10px;" src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar" [routerLink]="['/account']">
     </ion-avatar>
     <ion-label style="font-weight: bolder;font-size: larger;">Bem vindo(a) de volta!</ion-label>
-    <ion-searchbar></ion-searchbar>
-    <ion-card *ngFor="let item of items">
-        <img src=" {{item.image}}" />
+    <ion-searchbar animated></ion-searchbar>
+    <ion-card *ngFor="let article of articles">
+        <a href="{{article.url}}"> <img [src]=" article.urlToImage" /></a>
         <ion-card-header>
-            <ion-card-subtitle> {{item.subtitle}}</ion-card-subtitle>
-            <ion-card-title> {{item.title}}</ion-card-title>
+            <ion-card-subtitle> {{article.publishedAt | date :'d/MMM/y hh:mm a'}}</ion-card-subtitle>
+            <ion-card-title> {{article.title}}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-            {{item.content}}
+            {{article.descrption}}
         </ion-card-content>
     </ion-card>
 </ion-content>

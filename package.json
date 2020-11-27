@@ -49,6 +49,7 @@
     "core-js": "^3.6.4",
     "firebase": "^7.24.0",
     "moment": "^2.29.1",
+    "newsapi": "^2.4.1",
     "ng2-google-charts": "^6.1.0",
     "rxjs": "^6.5.4",
     "sw-toolbox": "3.6.0",

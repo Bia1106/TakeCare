@@ -46,7 +46,8 @@ export class LoginPage {
       this.auth.setUserLogged(true);
       this.router.navigateByUrl('/app/tabs/map');
     }).catch((error) => {
-      console.log('Erro no login:', error);
+      alert('Email ou senha inválidos!');
+      window.location.reload();
     });
 
 
