@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { SupportPage } from './support';
+import { SupportPage } from "./SupportPage";
 import { SupportPageRoutingModule } from './support-routing.module';
 
 @NgModule({
@@ -10,7 +10,8 @@ import { SupportPageRoutingModule } from './support-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    SupportPageRoutingModule
+    SupportPageRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [
     SupportPage,

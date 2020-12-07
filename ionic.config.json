@@ -1,7 +1,7 @@
 {
-    "name": "Take Care",
-    "integrations": {
-        "cordova": {}
-    },
-    "type": "angular"
+  "name": "Take Care",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
 }

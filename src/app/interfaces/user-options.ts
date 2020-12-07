@@ -8,6 +8,9 @@ export interface UserOptions {
   dataNasc: string;
   tipoSangue: string;
   sexo: string;
+  photo:string;
+  uriPhotoExibir:string;
+  nomePhotoEnviada:string;
 }
 
 export interface UserLogin {

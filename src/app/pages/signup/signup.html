@@ -16,9 +16,12 @@
     <!-- <form #signupForm="ngForm" novalidate> -->
     <form id="signupForm" name="signupForm" #signupForm="ngForm" [formGroup]="signUp" (submit)="onSignup()">
         <ion-list lines="none">
-            <ion-item>
-                <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
-            </ion-item>
+            <ion-card>
+                <ion-button shape="round" (click)="presentActionSheet()">Adicionar Imagem</ion-button>
+                <ion-card-content>
+                    <ion-img src="{{imagemSelecionada}}" style="width: 150px;height: 150px;"></ion-img>
+                </ion-card-content>
+            </ion-card>
             <ion-item lines="inset">
                 <ion-label position="floating" color="primary">Nome de Usuário</ion-label>
                 <ion-input name="username" type="text" formControlName="username">

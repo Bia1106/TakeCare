@@ -1,3 +1,4 @@
+import { Camera } from '@ionic-native/camera/ngx';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { firebaseConfig } from './credentials';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -12,8 +13,11 @@ import {AngularFireModule} from 'angularfire2';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import {WebView} from '@ionic-native/ionic-webview/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
 
 
+import { File } from '@ionic-native/file/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -38,7 +42,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     })
   ],
   declarations: [AppComponent],
-  providers: [InAppBrowser, SplashScreen, StatusBar,AngularFirestore,AngularFireAuthGuard],
+  providers: [InAppBrowser, SplashScreen, StatusBar,AngularFirestore,AngularFireAuthGuard,Camera,File,WebView,FilePath],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

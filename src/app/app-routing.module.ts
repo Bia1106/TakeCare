@@ -46,11 +46,6 @@ const routes: Routes = [
     path: 'form-general-info',
     loadChildren: () => import('./pages/form-general-info/form-general-info.module').then( m => m.FormGeneralInfoPageModule),
     canActivate: [AuthGuardService]
-  },
-  {
-    path: 'chat',
-    loadChildren: () => import('./pages/chat/chat.module').then( m => m.ChatPageModule),
-    canActivate: [AuthGuardService]
   }
 
 

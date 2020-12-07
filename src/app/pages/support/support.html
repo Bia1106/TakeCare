@@ -9,25 +9,22 @@
 
 <ion-content>
     <div class="support-logo">
-        <img src="assets/img/appicon.svg" alt="Ionic Logo">
+        <img src="assets/img/icon.png" alt="Ionic Logo">
     </div>
 
-    <form #submitForm="ngForm" novalidate (ngSubmit)="submit(submitForm)">
+    <form id="messageForm" name="messageForm" #messageForm="ngForm" [formGroup]="message" (submit)="onMessage()">
         <ion-list lines="none">
             <ion-item>
-                <ion-label position="stacked" color="primary">Enter your support message below</ion-label>
-                <ion-textarea [(ngModel)]="supportMessage" name="supportQuestion" #supportQuestion="ngModel" rows="6" required></ion-textarea>
+                <ion-label position="stacked" color="primary">Digite sua mensagem abaixo:</ion-label>
+                <ion-textarea name="supportQuestion" formControlName="supportQuestion" rows="6"></ion-textarea>
+                <small class="error-message" *ngIf="(message.get('username').errors?.required || message.get('username').errors?.minLength || message.get('username').errors?.maxLength) && (messageForm.submitted || message.get('username').touched)">
+                    Preencha campo corretamente
+                </small>
             </ion-item>
         </ion-list>
 
-        <ion-text color="danger">
-            <p [hidden]="supportQuestion.valid || submitted === false" class="ion-padding-start">
-                Support message is required
-            </p>
-        </ion-text>
-
         <div class="ion-padding">
-            <ion-button expand="block" type="submit">Submit</ion-button>
+            <ion-button expand="block" [disabled]="!message.valid" type="submit">Enviar</ion-button>
         </div>
     </form>
 </ion-content>
