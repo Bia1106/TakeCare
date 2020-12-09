@@ -9,6 +9,7 @@ import { UserOptions } from './../../interfaces/user-options';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActionSheetController, Platform } from '@ionic/angular';
+import { User } from 'firebase';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class SignupPage {
   signInData: any;
   public imagemSelecionada ='';
   public uriArqImagem='';
+  private user: UserOptions;
 
   constructor(
     public router: Router,
@@ -32,7 +34,7 @@ export class SignupPage {
     private webview: WebView,
     private platform: Platform,
     private filePath: FilePath,
-    private user: UserOptions
+    // private user: UserOptions
   ) { }
 
   async presentActionSheet() {

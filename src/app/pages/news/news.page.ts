@@ -1,5 +1,6 @@
 import { NewsServiceService } from './../../providers/news-service.service';
 import { Component, OnInit } from '@angular/core';
+import { StorageService } from '../../providers/storage.service';
 
 @Component({
   selector: 'app-news',
@@ -13,7 +14,8 @@ export class NewsPage implements OnInit {
   articles: any;
   private today: number = Date.now();
   private searchedItem:any;
-  constructor(private newsService: NewsServiceService) {
+  public username: string;
+  constructor(private newsService: NewsServiceService, private info:StorageService) {
     this.loadNews();
     
    }
@@ -25,6 +27,9 @@ export class NewsPage implements OnInit {
   }
 
   ngOnInit() {
+    this.info.get().then((nome:string) => {
+      this.username = nome;
+    })
   }
 
 }

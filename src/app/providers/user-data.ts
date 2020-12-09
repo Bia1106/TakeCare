@@ -85,4 +85,8 @@ export class UserData {
   logout() {
     this.router.navigateByUrl('/login');
   }
+
+  getUsername(userEmail:string){
+    return this.afs.collection('users',ref=>ref.where('email','==',userEmail)).snapshotChanges()
+  }
 }

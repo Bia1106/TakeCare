@@ -17,7 +17,7 @@
             <ion-item>
                 <ion-label position="stacked" color="primary">Digite sua mensagem abaixo:</ion-label>
                 <ion-textarea name="supportQuestion" formControlName="supportQuestion" rows="6"></ion-textarea>
-                <small class="error-message" *ngIf="(message.get('username').errors?.required || message.get('username').errors?.minLength || message.get('username').errors?.maxLength) && (messageForm.submitted || message.get('username').touched)">
+                <small class="error-message" *ngIf="(message.get('supportQuestion').errors?.required || message.get('supportQuestion').errors?.minLength || message.get('supportQuestion').errors?.maxLength) && (messageForm.submitted || message.get('supportQuestion').touched)">
                     Preencha campo corretamente
                 </small>
             </ion-item>

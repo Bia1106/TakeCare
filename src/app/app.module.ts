@@ -31,6 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot({name:'_usuario',driverOrder:['sqlite','indexeddb','websql']}),
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,

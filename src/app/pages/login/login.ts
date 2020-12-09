@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { UserData } from '../../providers/user-data';
 import { AuthenticationService } from '../../providers/authentication.service';
+import { StorageService } from '../../providers/storage.service';
 
 
 
@@ -20,7 +21,8 @@ export class LoginPage {
     public userData: UserData,
     public router: Router,
     private auth: AuthenticationService,
-    private formBulder: FormBuilder
+    private formBulder: FormBuilder,
+    private info: StorageService
   ) {
     this.auth.logOut().then((data) => {
       this.auth.setUserLogged(false);
@@ -43,8 +45,16 @@ export class LoginPage {
 
     this.auth.logIn(loginData).then((data) => {
       console.log('data', data);
-      this.auth.setUserLogged(true);
-      this.router.navigateByUrl('/app/tabs/map');
+      this.userData.getUsername(loginData.email).subscribe((user) => {
+        const [usuario] = user
+        console.log(user)
+        this.info.add(usuario.payload.doc.data()[
+          'username'
+        ]).then(()=>{
+          this.auth.setUserLogged(true);
+          this.router.navigateByUrl('/app/tabs/map');
+        })
+      })
     }).catch((error) => {
       alert('Email ou senha inválidos!');
       window.location.reload();

@@ -1,7 +1,9 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 import { AlertController } from '@ionic/angular';
+import { StorageService } from '../../providers/storage.service';
 
 import { UserData } from '../../providers/user-data';
 
@@ -11,27 +13,26 @@ import { UserData } from '../../providers/user-data';
   templateUrl: 'account.html',
   styleUrls: ['./account.scss'],
 })
-export class AccountPage implements AfterViewInit {
+export class AccountPage {
   username: string;
   password: string;
 
   constructor(
     public alertCtrl: AlertController,
     public router: Router,
-    public userData: UserData
+    public userData: UserData,
+    private info: StorageService
   ) { }
 
-  ngAfterViewInit() {
-    this.getUsername();
+  ngOnInit() {
+    // this.info.get()
   }
 
   updatePicture() {
     console.log('Clicked to update picture');
   }
 
-  // Present an alert with the current username populated
-  // clicking OK will update the username and display it
-  // clicking Cancel will close the alert and do nothing
+
   //MUDAR PARA EXIBIR DADOS VINDO DO FIRESTORE!!!!!!!!!!
   async changeUsername() {
     const alert = await this.alertCtrl.create({
@@ -41,8 +42,8 @@ export class AccountPage implements AfterViewInit {
         {
           text: 'Ok',
           handler: (data: any) => {
-            // this.userData.setUsername(data.username);
-            this.getUsername();
+            console.log(data)
+            this.info.add(data.username)
           }
         }
       ],
@@ -51,19 +52,25 @@ export class AccountPage implements AfterViewInit {
           type: 'text',
           name: 'username',
           value: this.username,
-          placeholder: 'username'
+          // placeholder: 'username'
         }
       ]
     });
     await alert.present();
   }
+  callChangeUser() {
+    this.info.get().then((nome: string) => {
+      this.username = nome;
+      this.changeUsername();
+    })
 
+  }
   getUsername() {
     // this.userData.getUsername().then((username) => {
     //   this.username = username;
     // });
   }
-//MUDAR PARA EXIBIR DADOS VINDO DO FIRESTORE!!!!!!!!!!
+  //MUDAR PARA EXIBIR DADOS VINDO DO FIRESTORE!!!!!!!!!!
   async changePassword() {
     const alert = await this.alertCtrl.create({
       header: 'Mudar Senha',
@@ -88,9 +95,7 @@ export class AccountPage implements AfterViewInit {
     });
     await alert.present();
   }
-  chat() {
-    this.router.navigateByUrl('/chat');
-  }
+
 
   logout() {
     this.userData.logout();
@@ -100,4 +105,6 @@ export class AccountPage implements AfterViewInit {
   support() {
     this.router.navigateByUrl('/support');
   }
+
+
 }

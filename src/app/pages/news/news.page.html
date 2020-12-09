@@ -13,7 +13,7 @@
     <ion-avatar>
         <img style="margin-left: 280px;margin-top: 10px;" src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar" [routerLink]="['/account']">
     </ion-avatar>
-    <ion-label style="font-weight: bolder;font-size: larger;">Bem vindo(a) de volta!</ion-label>
+    <ion-label style="font-weight: bolder;font-size: larger;">Bem vindo(a) {{username}} de volta!</ion-label>
     <ion-searchbar animated></ion-searchbar>
     <ion-card *ngFor="let article of articles">
         <a href="{{article.url}}"> <img [src]=" article.urlToImage" /></a>
